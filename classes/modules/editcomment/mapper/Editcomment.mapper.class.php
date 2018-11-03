@@ -16,19 +16,21 @@ class PluginEditcomment_ModuleEditcomment_MapperEditcomment extends Mapper
 {
     public function HasAnswers($sId)
     {
-        $sql="SELECT
-        comment_id
+        $table = Config::Get('db.table.comment');
+
+        $sql = "
+        SELECT
+            comment_id
         FROM
-        " . Config::Get('db.table.comment') . "
+            {$table}
         WHERE
-        comment_pid=?d	and comment_delete=0 and comment_publish=1
-        LIMIT 0,1 ;";
-        
-        if ($aRow=$this->oDb->selectRow($sql, $sId))
-        {
+            comment_pid=?d	AND comment_delete=0 AND comment_publish=1
+        LIMIT 0,1 ;
+        ";
+
+        if ($this->oDb->selectRow($sql, $sId)) {
             return true;
         }
         return false;
     }
 }
-?>

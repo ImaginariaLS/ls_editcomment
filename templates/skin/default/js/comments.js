@@ -1,8 +1,8 @@
 var ls = ls ||
-{};
+    {};
 
 ls.comments = ls.comments ||
-{};
+    {};
 
 /**
  * Обработка комментариев
@@ -62,7 +62,7 @@ ls.comments = (function ($) {
             $('#comment_content_id_' + idComment).addClass(thisObj.options.classes.form_loader);
             ls.ajax(aRouter.ajax + 'editcomment-getsource/',
                 {
-                    'idComment':idComment
+                    'idComment': idComment
                 }, function (result) {
                     $('#comment_content_id_' + idComment).removeClass(thisObj.options.classes.form_loader);
                     if (!result) {
@@ -102,8 +102,7 @@ ls.comments = (function ($) {
         }
     }
 
-    this.setFormText=function (sText)
-    {
+    this.setFormText = function (sText) {
         if (this.options.wysiwyg) {
             tinyMCE.execCommand('mceRemoveControl', false, 'form_comment_text');
             $('#form_comment_text').val(sText);
@@ -122,11 +121,9 @@ ls.comments = (function ($) {
         if (this.options.wysiwyg) {
             $('#' + formObj + ' textarea').val(tinyMCE.activeEditor.getContent());
         }
-        else
-            if (typeof($('#form_comment_text').getObject) == 'function')
-            {
-                $('#' + formObj + ' textarea').val($('#form_comment_text').getCode());
-            }
+        else if (typeof($('#form_comment_text').getObject) == 'function') {
+            $('#' + formObj + ' textarea').val($('#form_comment_text').getCode());
+        }
         formObj = $('#' + formObj);
 
         $('#form_comment_text').addClass(this.options.classes.form_loader).attr('readonly', true);
@@ -167,7 +164,7 @@ ls.comments = (function ($) {
                     }
                 }
 
-                ls.hook.run('ls_comments_edit_after', [ formObj, targetId, targetType, result ]);
+                ls.hook.run('ls_comments_edit_after', [formObj, targetId, targetType, result]);
             }
         }.bind(this));
     }
@@ -211,7 +208,7 @@ ls.comments = (function ($) {
 
     return this;
 }).call(ls.comments ||
-{}, jQuery);
+    {}, jQuery);
 
 jQuery(document).ready(function () {
     ls.comments.init_editcomment();

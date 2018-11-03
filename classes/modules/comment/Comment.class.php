@@ -20,4 +20,3 @@ class PluginEditcomment_ModuleComment extends PluginEditcomment_Inherit_ModuleCo
 {
 
 }
-?>
