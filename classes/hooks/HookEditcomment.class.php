@@ -14,6 +14,12 @@
 
 class PluginEditcomment_HookEditcomment extends Hook
 {
+    const ConfigKey = 'editcomment';
+    const HooksArray = [
+        'template_comment_action'   =>  'InjectEditLink',
+        'template_comment_tree_end' =>  'InjectEditButtonCode',
+        'template_topic_show_end'   =>  'InjectSponsorLink'
+    ];
 
     protected $oUserCurrent;
 
@@ -23,9 +29,15 @@ class PluginEditcomment_HookEditcomment extends Hook
         if (!$this->oUserCurrent)
             return;
 
-        $this->AddHook('template_comment_action', 'InjectEditLink');
-        $this->AddHook('template_comment_tree_end', 'InjectEditButtonCode');
-        $this->AddHook('template_topic_show_end', 'InjectSponsorLink');
+        $plugin_config_key = $this::ConfigKey;
+        foreach ($this::HooksArray as $hook => $callback) {
+            $this->AddHook(
+                $hook,
+                $callback,
+                __CLASS__,
+                Config::Get("plugin.{$plugin_config_key}.hook_priority.{$hook}") ?? 1
+            );
+        }
     }
 
     public function InjectEditLink($aParam)
