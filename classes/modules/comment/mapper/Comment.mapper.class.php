@@ -46,7 +46,7 @@ class PluginEditcomment_ModuleComment_MapperComment extends PluginEditcomment_In
 
         $sql = "UPDATE {$table}
         SET
-        comment_edit_count= ?d,
+        comment_edit_count = ?d,
         comment_edit_date=?
         WHERE
         comment_id = ?d
